@@ -1,0 +1,11 @@
+.avatar {
+  height: 200px;
+  width: 200px;
+  margin-bottom: 20px;
+}
+.fullName {
+  margin-bottom: 20px;
+}
+.address{
+    margin: 0;
+}

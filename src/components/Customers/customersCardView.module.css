@@ -1,0 +1,31 @@
+.root {
+  margin: 10px 0;
+}
+paper {
+  padding: 20px;
+  text-align: center;
+}
+div.cardHeader {
+  background-color: #007bff;
+  color: white;
+  display: flex;
+  padding: 2px;
+  justify-content: flex-end;
+}
+
+div.cardHeader svg {
+  font-size: 28px;
+}
+
+div.cardContent {
+  display: flex;
+}
+img.cardImg {
+  flex: 0 1 130px;
+  width: 130px;
+  height: 130px;
+  margin-right: 20px;
+}
+.cardDescription {
+  flex: 1 0 auto;
+}

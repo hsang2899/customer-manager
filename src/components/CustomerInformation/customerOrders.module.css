@@ -1,0 +1,17 @@
+.root {
+  margin-bottom: 20px;
+}
+.orders {
+  margin-top: 20px;
+}
+.order {
+}
+.price {
+  float: right;
+}
+hr.border{
+    border-color: black;
+}
+.orderTotal{
+    text-align: right;
+}

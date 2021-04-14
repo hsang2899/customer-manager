@@ -1,0 +1,62 @@
+.root {
+  padding: 20px;
+  background-color: white;
+}
+.tabContent {
+  margin-top: 25px;
+}
+.paginationParent {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+.paginationChild {
+  padding: 20px;
+}
+.header {
+  display: flex;
+}
+.searchBar {
+  flex: 0 1 300px;
+}
+
+.tabParent {
+  display: flex;
+  justify-content: flex-end;
+  height: 100px;
+}
+.tabHeader {
+  flex: 1 0 auto;
+}
+.pageHeader{
+  margin-bottom: 20px;
+}
+:global(.btn-link).buttonLink{
+  font-weight: 500;
+  font-size: 18px;
+  color: #939393;
+  text-decoration: none;
+  border:0;
+  outline: none;
+  box-shadow:none;
+  line-height: 20px; 
+}
+:global(.btn-link).buttonLinkActive{
+  color: black;
+}
+
+:global(.btn-link).buttonLink svg{
+  vertical-align: bottom;
+}
+
+:global(.btn-link).buttonLink:focus, :global(.btn-link).buttonLink:active{
+  text-decoration: none;
+  outline: 0;
+  border: none;
+  box-shadow: none;
+}
+
+:global(.btn-link).buttonLink:hover{
+  text-decoration: none;
+  color: initial;
+}
