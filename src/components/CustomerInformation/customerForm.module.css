@@ -1,0 +1,10 @@
+.buttonGroup {
+  display: flex;
+  justify-content: flex-end;
+}
+.cancelButton {
+  margin-right: 10px;
+}
+.deleteButton {
+  margin-right: auto;
+}

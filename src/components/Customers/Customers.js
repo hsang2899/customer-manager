@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import { CustomersCardView } from "./CustomersCardView";
 import { CustomersListView } from "./CustomersListView";
@@ -10,6 +10,7 @@ import _ from "lodash";
 import { Button } from "react-bootstrap";
 import { GridFill, List, Plus } from "react-bootstrap-icons";
 import { PaginationCustom } from "../Pagination/PaginationCustom";
+import { Redirect } from "react-router-dom";
 
 async function getCustomers(auth) {
   console.log(auth);
@@ -25,22 +26,15 @@ async function getCustomers(auth) {
 const tabs = ["CardView", "ListView", "New Customer"];
 
 export default function Customers() {
-  const pageSize = 10;
   const [auth] = useContext(AuthContext);
-  const [value, setValue] = useState(0);
+  const pageSize = auth.numberPerPage;
+  console.log(auth.numberPerPage);
   const [tab, setTab] = useState(tabs[0]);
   const [customersList, setCustomersList] = useState([]);
   const [page, setPage] = useState(1);
   const [pageCount, setPageCount] = useState(1);
   const [searchText, setSearchText] = useState("");
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
-  const handleChangeIndex = (index) => {
-    setValue(index);
-  };
+  const [totalItems, setTotalItems] = useState(0);
 
   const handleChangePaging = (value) => {
     setPage(value);
@@ -51,7 +45,15 @@ export default function Customers() {
     setSearchText(value);
   };
 
+  const paginationDescription = () => {
+    let total = totalItems;
+    let first = (page - 1) * pageSize + 1;
+    let last = page == pageCount ? first -1 + (total % pageSize) : page * pageSize;
+    return `Shows ${first} - ${last} of ${total}`;
+  };
+
   const fillData = (list) => {
+    
     const filtered = _.filter(
       list,
       (u) =>
@@ -68,6 +70,7 @@ export default function Customers() {
         ? pageCount + 1
         : pageCount
     );
+    setTotalItems(pageLength);
     setCustomersList(paged);
   };
 
@@ -82,19 +85,18 @@ export default function Customers() {
       });
   }, [page, searchText]);
 
-  const currentTab = () => {
-    console.log("zo");
+  const currentTab = useMemo(() => {
     switch (tab) {
       case tabs[0]:
         return <CustomersCardView customersList={customersList} />;
       case tabs[1]:
         return <CustomersListView customersList={customersList} />;
       case tabs[2]:
-        return "Item Three";
+        return <Redirect to="/customers/create" />;
       default:
         return <CustomersCardView customersList={customersList} />;
     }
-  };
+  }, [tab, customersList]);
 
   return (
     <div className={classes.root}>
@@ -133,13 +135,14 @@ export default function Customers() {
           handleSubmit={handleChangeSearchText}
         />
       </div>
-      <div>{currentTab()}</div>
+      <div>{currentTab}</div>
       <div className={classes.paginationParent}>
         <PaginationCustom
           count={pageCount}
           page={page}
           onChange={handleChangePaging}
         />
+        <div>{paginationDescription()}</div>
       </div>
     </div>
   );

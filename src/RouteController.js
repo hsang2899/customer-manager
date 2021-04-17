@@ -4,7 +4,7 @@ import React from "react";
 import { AuthContext } from "./Context/AuthContextProvider";
 import Login from "./components/Login/Login";
 import { Dashboard } from "./components/Dashboard/Dashboard";
-import { NavLink as RouterLink } from "react-router-dom";
+import { NavLink as RouterLink, Redirect } from "react-router-dom";
 
 import Customers from "./components/Customers/Customers";
 import Settings from "./components/Settings/Settings";
@@ -26,7 +26,8 @@ const navBarStyle = {
 };
 
 const RouteController = () => {
-  const [setAuth] = useContext(AuthContext);
+  const [auth, setAuth] = useContext(AuthContext);
+  console.log(auth);
 
   const logout = () => {
     localStorage.removeItem("token");
@@ -53,8 +54,7 @@ const RouteController = () => {
               <Nav className="mr-auto">
                 <NavLink
                   className="nav-link"
-                  to="/"
-                  exact
+                  to="/customers"
                   activeClassName="active"
                 >
                   Customers
@@ -62,7 +62,6 @@ const RouteController = () => {
                 <NavLink
                   className="nav-link"
                   to="/settings"
-                  exact
                   activeClassName="active"
                 >
                   Settings
@@ -80,12 +79,20 @@ const RouteController = () => {
               <Route path="/login">
                 <Login />
               </Route>
+
               <PrivateRoute path="/settings" component={Settings} />
-              <PrivateRoute exact path="/" component={Customers} />
+              <PrivateRoute exact path="/customers" component={Customers} />
+              <PrivateRoute
+                path="/customers/create"
+                component={CustomerInformation}
+              />
               <PrivateRoute
                 path="/customers/:id"
                 component={CustomerInformation}
               />
+              <Route exact path="/">
+                <Redirect to="/customers" />;
+              </Route>
             </Switch>
           </Container>
         </div>

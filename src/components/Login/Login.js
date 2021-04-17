@@ -47,13 +47,15 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const token = await loginUser({
+    const authDto = await loginUser({
       email,
       password,
     });
-    if (token) {
-      setAuth(token);
-      localStorage.setItem("token",token);
+    console.log(authDto);
+    if (authDto) {
+      let newAuthDto = { ...authDto, password: undefined };
+      setAuth(newAuthDto);
+      localStorage.setItem("token", JSON.stringify(newAuthDto));
       history.push("/");
     }
   };

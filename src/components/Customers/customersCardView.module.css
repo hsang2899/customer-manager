@@ -29,3 +29,11 @@ img.cardImg {
 .cardDescription {
   flex: 1 0 auto;
 }
+
+.cardName {
+  font-size: 1.5em;
+  margin-right: auto;
+  margin-left: 10px;
+  margin-bottom: 0;
+  line-height: 40px;
+}

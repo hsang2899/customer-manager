@@ -27,7 +27,7 @@ export const CustomersListView = (props) => {
         <td align="right">{row.state?.name}</td>
         <td align="right">{formatter.format(orderTotal)}</td>
         <td align="right">
-          <Link to="/">View orders</Link>
+          <Link to={`/customers/${row.id}`}>View orders</Link>
         </td>
       </tr>
     );
